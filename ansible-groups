@@ -11,5 +11,5 @@ from ansible.inventory import Inventory
 
 if __name__ == '__main__':
     i = Inventory()
-    groups = i.groups_list().keys()
-    print('\n'.join(sorted(groups)))
+    groups = i.list_groups()
+    print('\n'.join(groups))
