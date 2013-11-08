@@ -1,0 +1,54 @@
+#!/usr/bin/env perl
+#
+# name     : ansible-site, create playbook for ansible
+# author   : Xu Xiaodong <xxdlhy@gmail.com>
+# license  : GPL
+# created  : 2013 Nov 07
+# modified : 2013 Nov 08
+#
+
+use strict;
+use warnings;
+
+use YAML;
+use Getopt::Long;
+
+my $name  = '';
+my $hosts = '';
+my $user  = '';
+my $sudo  = 0;
+my @roles = ();
+
+GetOptions(
+    'name=s'  => \$name,
+    'hosts=s' => \$hosts,
+    'user=s'  => \$user,
+    'sudo'    => \$sudo,
+    'roles=s' => \@roles,
+);
+
+my $array;
+if ( $name && $hosts && $user && @roles ) {
+    @roles = split( /,/, join( ',', @roles ) );
+    my $hash = {
+        name  => $name,
+        hosts => $hosts,
+        user  => $user,
+        roles => [@roles],
+    };
+
+    if ($sudo) {
+        $hash->{sudo} = 'True';
+        YAML::Bless($hash)->keys( [qw(name hosts user sudo roles)] );
+    }
+    else {
+        YAML::Bless($hash)->keys( [qw(name hosts user roles)] );
+    }
+
+    push @$array, $hash;
+}
+else {
+    die "Usage: $0 -n <name> -h <hosts> -u <user> [-s] -r <role,role,role...>\n";
+}
+
+YAML::DumpFile( 'temp.yml', $array );

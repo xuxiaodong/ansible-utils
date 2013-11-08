@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# name     : ansible-hosts, list hosts 
+# author   : Xu Xiaodong <xxdlhy@gmail.com>
+# license  : GPL
+# created  : 2013 Nov 08
+# modified : 2013 Nov 08
+#
+
+pattern=$1
+cmd=$(which ansible)
+
+if [ -z $pattern ]; then
+    echo "Usage: $0 <pattern>"
+    exit 1
+fi
+
+$cmd $1 --list-hosts
+
+exit 0

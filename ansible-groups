@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+#
+# name     : ansible-groups, list host groups 
+# author   : Xu Xiaodong <xxdlhy@gmail.com>
+# license  : GPL
+# created  : 2013 Nov 08
+# modified : 2013 Nov 08
+#
+
+from ansible.inventory import Inventory
+
+if __name__ == '__main__':
+    i = Inventory()
+    groups = i.groups_list().keys()
+    print('\n'.join(sorted(groups)))
