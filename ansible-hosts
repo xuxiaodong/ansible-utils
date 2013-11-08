@@ -15,6 +15,6 @@ if [ -z $pattern ]; then
     exit 1
 fi
 
-$cmd $1 --list-hosts
+$cmd $pattern --list-hosts
 
 exit 0
