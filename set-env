@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# name     : set-env, set ANSIBLE_HOSTS environment variable
+# author   : Xu Xiaodong <xxdlhy@gmail.com>
+# license  : GPL
+# created  : 2013 Nov 08
+# modified : 2013 Nov 08
+#
+
+hosts_file=$1
+
+if [ -z $hosts_file ]; then
+    echo "Usage: source $0 <hosts file>"
+fi
+
+export ANSIBLE_HOSTS=$1
