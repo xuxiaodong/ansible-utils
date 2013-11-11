@@ -4,12 +4,15 @@
 # author   : Xu Xiaodong <xxdlhy@gmail.com>
 # license  : GPL
 # created  : 2013 Nov 08
-# modified : 2013 Nov 08
+# modified : 2013 Nov 11
 #
 
 from ansible.inventory import Inventory
 
-if __name__ == '__main__':
+def get_groups():
     i = Inventory()
     groups = i.list_groups()
-    print('\n'.join(groups))
+    return '\n'.join(groups)
+
+if __name__ == '__main__':
+    print(get_groups())
