@@ -42,10 +42,13 @@ def create_yml(name, hosts, user, roles, output):
     yaml.dump(data, stream, default_flow_style=False, explicit_start=True)
 
 def parse_cmd():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+            description='Create playbook for ansible.',
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+            conflict_handler='resolve')
     parser.add_argument('-n', '--name', default='bootstrap server',
             help='playbook name')
-    parser.add_argument('-s', '--hosts', required=True, help='playbook hosts')
+    parser.add_argument('-h', '--hosts', required=True, help='playbook hosts')
     parser.add_argument('-u', '--user', default='root', help='playbook user')
     parser.add_argument('-r', '--roles', nargs='*', required=True,
             help='playbook roles')
