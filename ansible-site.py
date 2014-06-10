@@ -41,7 +41,7 @@ def create_yml(name, hosts, user, roles, output):
 
     yaml.dump(data, stream, default_flow_style=False, explicit_start=True)
 
-if __name__ == '__main__':
+def parse_cmd():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name', default='bootstrap server',
             help='playbook name')
@@ -52,4 +52,9 @@ if __name__ == '__main__':
     parser.add_argument('-o', '--output', default='temp', help='playbook output file')
 
     args = parser.parse_args()
-    create_yml(args.name, args.hosts, args.user, args.roles, args.output)
+
+    return [args.name, args.hosts, args.user, args.roles, args.output]
+
+if __name__ == '__main__':
+    args = parse_cmd()
+    create_yml(*args)
